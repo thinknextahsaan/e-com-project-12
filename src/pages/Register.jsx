@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { registerValidation } from "../lib/validations";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { UserContext } from "../context/UserContext";
 
 const INITIAL_STATE = {
     username: "",
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
 };
 
 const Register = () => {
+    const { user, registerUser } = useContext(UserContext);
     const navigate = useNavigate();
     const [registerData, setRegisterData] = useState(INITIAL_STATE);
 
@@ -20,31 +22,14 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            let result = await registerValidation.validate(registerData, {
-                abortEarly: false,
-            });
-
-            let response = await axios.post("/users/register", {
-                ...result,
-                role: "ADMIN",
-            });
-
-            if (!response.statusText === "OK") {
-                Promise.reject("Registration failed!");
-            }
-
-            console.log(response.data);
-            toast.success("Registration Success!");
-            setRegisterData(INITIAL_STATE);
-            navigate("/login");
-        } catch (error) {
-            toast.error(
-                error.message || error?.errors[0] || "Something went wrong"
-            );
-        }
+        await registerUser(registerData);
+        setRegisterData(INITIAL_STATE);
+        navigate("/login");
     };
+
+    if (user) {
+        return <Navigate to={"/"} replace={true} />;
+    }
 
     return (
         <div className="h-screen bg-white">

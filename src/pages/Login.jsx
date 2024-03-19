@@ -1,7 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { loginValidations } from "../lib/validations";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { UserContext } from "../context/UserContext";
+
+const INITIAL_STATE = {
+    username: "",
+    password: "",
+};
 
 const Login = () => {
+    const navigate = useNavigate();
+    const { user, loginUser } = useContext(UserContext);
+    const [loginData, setLoginData] = useState(INITIAL_STATE);
+
+    const handleChange = (e) => {
+        setLoginData({ ...loginData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await loginUser(loginData);
+        setLoginData(INITIAL_STATE);
+        navigate("/", { replace: true });
+    };
+
+    if (user) {
+        return <Navigate to={"/"} />;
+    }
+
     return (
         <div className="h-screen bg-white">
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -12,20 +40,22 @@ const Login = () => {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6" action="#" method="POST">
+                    <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <div className="flex items-center justify-between">
                                 <label
                                     htmlFor="password"
                                     className="block text-sm font-medium leading-6 text-gray-900"
                                 >
-                                    Email
+                                    Username
                                 </label>
                             </div>
                             <div className="mt-2">
                                 <input
-                                    name="email"
-                                    type="email"
+                                    value={loginData.username}
+                                    onChange={handleChange}
+                                    name="username"
+                                    type="text"
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
@@ -41,11 +71,10 @@ const Login = () => {
                             </div>
                             <div className="mt-2">
                                 <input
-                                    id="password"
+                                    value={loginData.password}
+                                    onChange={handleChange}
                                     name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    required
+                                    type="text"
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>

@@ -21,12 +21,7 @@ export const registerValidation = yup.object().shape({
         ),
 });
 
-
 export const loginValidations = yup.object().shape({
-    email: yup
-        .string()
-        .trim()
-        .required("Email is a required field.")
-        .email("Not a valid email"),
+    username: yup.string().trim().required("Username is a required field."),
     password: yup.string().trim().required("Password is a required field."),
 });
