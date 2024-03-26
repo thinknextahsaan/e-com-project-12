@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 import { UserContext } from "../context/UserContext";
+import logo from "../assets/logo.png"
 
 const links = [
     {
@@ -21,21 +23,55 @@ const Navbar = () => {
     const { user, logoutUser } = useContext(UserContext);
 
     return (
-        <header className="shadow-lg">
-            <div className="w-full max-w-screen-lg mx-auto flex py-2 items-center justify-between">
-                <h1>Logo</h1>
+        <header className="sticky top-0  bg-white shadow-lg z-50">
+            <div className="flex items-center justify-between px-10 py-5">
+                <div className="flex flex-shrink-0 items-center gap-10">
+                    <img
+                        className="h-14 w-auto"
+                        src={logo}
+                        alt="Your Company"
+                    />
+                    <div className="flex space-x-4">
+                        {links.map((item) => (
+                            <Link
+                                className="px-2 py-1 font-semibold text-slate-700"
+                                key={item.text}
+                                to={item.path}
+                            >
+                                {item.text}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
 
-                <nav className="flex gap-2 ">
-                    {links.map((link) => {
-                        return <Link key={link.text} to={link.path}>{link.text}</Link>;
-                    })}
-
+                <div className="flex gap-3">
+                    <Link to={"/cart"}>
+                        <button className=" px-2 py-1 font-semibold text-slate-700 flex gap-2 items-center">
+                           <FaShoppingCart/> Cart
+                        </button>
+                    </Link>
                     {user ? (
-                        <button onClick={logoutUser}>Logout</button>
+                        <button
+                            className=" px-2 py-1 font-semibold text-slate-700"
+                            onClick={logoutUser}
+                        >
+                            Logout
+                        </button>
                     ) : (
-                        <button>Login</button>
+                        <div className="flex gap-5">
+                            <Link to={"/login"}>
+                                <button className="px-2 py-1 font-semibold text-white bg-[#2A254B]">
+                                    Login
+                                </button>
+                            </Link>
+                            <Link to={"/register"}>
+                                <button className="px-2 py-1 font-semibold text-white bg-[#2A254B]">
+                                    Register
+                                </button>
+                            </Link>
+                        </div>
                     )}
-                </nav>
+                </div>
             </div>
         </header>
     );

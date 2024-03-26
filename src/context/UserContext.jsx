@@ -22,7 +22,7 @@ export default function UserContextProvider({ children }) {
 
             let response = await axios.post("/users/register", {
                 ...result,
-                // role: "ADMIN",
+                role: "ADMIN",
             });
 
             if (!response.statusText === "OK") {
