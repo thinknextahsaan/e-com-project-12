@@ -6,6 +6,8 @@ import { IoWalletOutline } from "react-icons/io5";
 import { PiFlowerTulipDuotone } from "react-icons/pi";
 import CollectionCard from "../components/CollectionCard";
 import axios from "axios";
+import HeroSection from "../components/HeroSection";
+import Features from "../components/Features";
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -17,11 +19,15 @@ const Home = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    console.log(products)
+    console.log(products);
 
     return (
         <>
-            <div className="w-[1200px] flex items-center justify-center h-[500px] mx-auto py-6">
+            <div>
+                <HeroSection />
+                <Features />
+            </div>
+            {/* <div className="w-[1200px] flex items-center justify-center h-[500px] mx-auto py-6">
                 <div className="bg-[#2A254B] h-full p-7 w-[600px] flex flex-col justify-between">
                     <div>
                         <h2 className="text-[35px] text-white">
@@ -44,9 +50,9 @@ const Home = () => {
                         alt=""
                     />
                 </div>
-            </div>
+            </div> */}
 
-            <div className="   h-[350px] pt-10 px-36 ">
+            {/* <div className="   h-[350px] pt-10 px-36 ">
                 <h2 className="text-3xl font-bold text-center mb-10 ">
                     What makes our brand different
                 </h2>
@@ -72,7 +78,7 @@ const Home = () => {
                         desc="We use 100% recycled packaging to ensure our footprint is manageable"
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="py-10 px-36  ">
                 <h2 className="text-3xl font-bold  mb-10 text-center ">
                     New Ceramics
@@ -112,7 +118,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className="p-20 bg-[#F9F9F9]">
+            {/* <div className="p-20 bg-[#F9F9F9]">
                 <div className="p-16 bg-white text-center">
                     <h2 className="text-3xl mb-4">
                         Join the club and get the benefits
@@ -133,9 +139,9 @@ const Home = () => {
                         </button>
                     </form>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="w-full flex h-[500px]">
+            {/* <div className="w-full flex h-[500px]">
                 <div className="bg-white h-full py-12 px-16 flex flex-col justify-between w-[1400px]">
                     <div>
                         <h2 className="text-[35px] text-black leading-10 mb-8">
@@ -165,7 +171,7 @@ const Home = () => {
                         alt=""
                     />
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
