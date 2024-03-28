@@ -6,13 +6,13 @@ const HeroSection = () => {
     return (
         <div className=" h-[350px] md:h-[450px] flex flex-col md:flex-row px-10 py-6">
             <div className="bg-custom-blue text-custom-white h-full p-4 flex-1">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-clash-regular lg:pr-[80px]">
                     The furniture brand for the future with timeless designs
                 </h2>
-                <Button className={"bg-custom-white/15 text-white mt-4"}>
+                <Button className={"bg-custom-white/15 text-white mt-5"}>
                     View Collections
                 </Button>
-                <p className="text-[14px] font-normal mt-6 text-white/70 ">
+                <p className="text-base font-normal mt-6 text-white/70 font-satoshi-regular ">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Repudiandae sunt eaque atque. Distinctio, totam tempore!
                 </p>

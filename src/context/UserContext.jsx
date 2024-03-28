@@ -22,7 +22,7 @@ export default function UserContextProvider({ children }) {
 
             let response = await axios.post("/users/register", {
                 ...result,
-                role: "ADMIN",
+                // role: "ADMIN",
             });
 
             if (!response.statusText === "OK") {
@@ -52,7 +52,7 @@ export default function UserContextProvider({ children }) {
             });
 
             if (!response.statusText === "OK") {
-                Promise.reject("Login failed!");
+                Promise.reject(new Error("Login failed"));
             }
 
             setUser(response.data.data);
@@ -60,6 +60,10 @@ export default function UserContextProvider({ children }) {
             toast.success("Login Success!");
             return true;
         } catch (error) {
+            if (error.response.status === 404) {
+                toast.error("User not Found!");
+                return false;
+            }
             toast.error(
                 error.message || error?.errors[0] || "Something went wrong"
             );

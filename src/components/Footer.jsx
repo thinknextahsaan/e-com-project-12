@@ -1,72 +1,108 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaFacebook, FaGithub, FaYoutube } from "react-icons/fa";
-import { FaXTwitter ,FaInstagram } from "react-icons/fa6";
+import Button from "./Button";
+import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
-  return (
-    <footer className=" flex font-light bg-[#2A254B] border shadow-lg text-white">
-      <div className="flex py-5 px-5 flex-col">
-        
-      <div className="flex  py-5">
-      <div className="pt-24 pb-8 px-6">
-          <img 
-            className="h-10 block align-middle"
-            src="src/assets/4141508.jpg"
-          />
-          <p className=" my-8 leading-6 text-lg w-[450px]">Making the world a better place through constructing elegant hierarchies.</p>
-          <div className="flex my-8 gap-8">
-            <Link to={"/"}><FaFacebook className="size-6"/></Link>
-            <Link to={"/"}><FaXTwitter className="size-6"/></Link>
-            <Link to={"/"}><FaInstagram className="size-6"/></Link>
-            <Link to={"/"}><FaGithub className="size-6"/></Link>
-            <Link to={"/"}><FaYoutube className="size-6"/></Link>
-          </div>
+    return (
+        <div className="bg-custom-blue p-20 pb-[30px] text-white">
+            <div>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-10">
+                    <div className="col-span-1">
+                        <h4 className="text-[18px] font-clash-regular mb-[15px]">
+                            Menu
+                        </h4>
+
+                        <ul className="flex flex-col gap-[10px]">
+                            <li className="text-[16px] font-satoshi-regular">
+                                New Arrivals
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Best Sellers
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Recently Viewed
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Popular this week
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-span-1">
+                        <h4 className="text-[18px] font-clash-regular mb-[15px]">
+                            Menu
+                        </h4>
+
+                        <ul className="flex flex-col gap-[10px]">
+                            <li className="text-[16px] font-satoshi-regular">
+                                New Arrivals
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Best Sellers
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Recently Viewed
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Popular this week
+                            </li>
+                        </ul>
+                    </div>{" "}
+                    <div className="col-span-1">
+                        <h4 className="text-[18px] font-clash-regular mb-[15px]">
+                            Menu
+                        </h4>
+
+                        <ul className="flex flex-col gap-[10px]">
+                            <li className="text-[16px] font-satoshi-regular">
+                                New Arrivals
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Best Sellers
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Recently Viewed
+                            </li>
+                            <li className="text-[16px] font-satoshi-regular">
+                                Popular this week
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-span-1 lg:col-span-3">
+                        <h4 className="text-[18px] font-clash-regular mb-[15px]">
+                            Join our mailing list
+                        </h4>
+                        <div className="flex lg:pr-[80px]">
+                            <input
+                                className="flex-1 py-4 bg-custom-white/20 border-none outline-none px-4 placeholder:font-satoshi-regular placeholder:text-white"
+                                type="text"
+                                placeholder="you@email.com"
+                            />
+                            <Button
+                                className={
+                                    "bg-white text-black px-2 md:px-10 py-4 font-satoshi-regular"
+                                }
+                            >
+                                Signup
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-custom-white/30 h-[1.5px] my-10 rounded-md" />
+                <div className="flex items-center justify-between">
+                    <h5 className="text-[15px] font-satoshi-regular">
+                        Copyright 2024 &copy; Thinknext Tech.
+                    </h5>
+                    <div className="flex gap-5 items-center">
+                        <FaInstagram />
+                        <FaInstagram />
+                        <FaInstagram />
+                        <FaInstagram />
+                        <FaInstagram />
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div className="grid gap-72 grid-cols-3 mt-16 ml-5">
-            <div>
-                <h1 className=" leading-6 font-semibold text-xl">Menu</h1>
-                <ul className="mt-6">
-                    <li className="text-lg mt-5">New Arrivals</li>
-                    <li className="text-lg mt-5">Best Sellers</li>
-                    <li className="text-lg mt-5">Recently viewed</li>
-                    <li className="text-lg mt-5">Popular this week</li>
-                    <li className="text-lg mt-5">All products</li>
-
-                </ul>
-            </div>
-            <div>
-                <h1 className=" leading-6 font-semibold text-xl">Categories</h1>
-                <ul className="mt-6">
-                    <li className="text-lg mt-5">Crockery</li>
-                    <li className="text-lg mt-5">Furniture</li>
-                    <li className="text-lg mt-5">Homeware</li>
-                    <li className="text-lg mt-5">Plant pots </li>
-                    <li className="text-lg mt-5">Chairs </li>
-                    <li className="text-lg mt-5">Crockery </li>
-
-                </ul>
-            </div>
-            <div>
-                <h1 className=" leading-6 font-semibold text-xl">Our Company</h1>
-                <ul className="mt-6">
-                    <li className="text-lg mt-5">About</li>
-                    <li className="text-lg mt-5">Blog</li>
-                    <li className="text-lg mt-5">Job</li>
-                    <li className="text-lg mt-5">Press</li>
-                    <li className="text-lg mt-5">Partners</li>
-                </ul>
-            </div>
-             
-        </div>
-      </div>
-       <div className="pt-10 border-t-2 text-center inline-block  ">
-        <p>© 2020 Your Company, Inc. All rights reserved.</p>
-       </div>
-      </div>
-    </footer>
-  );
+    );
 };
 
 export default Footer;

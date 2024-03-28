@@ -1,17 +1,55 @@
 import React from "react";
+import { TbTruckDelivery } from "react-icons/tb";
+import { CiCircleCheck } from "react-icons/ci";
 
 const Features = () => {
     return (
-        <div className="h-[350px] p-10 flex justify-center mb-[40px]">
+        <div className="h-auto p-10 flex justify-center mb-[40px]overflow-hidden">
             <div className=" h-full w-full">
-                <h3 className="text-center text-3xl font-bold">
-                    What makes Our Brand 'Different'
+                <h3 className="text-center text-2xl text-[#2A254B] font-clash-medium">
+                    What makes Our Brand 'Different'?
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-5 h-full">
-                    <div className="border border-black h-full">1</div>
-                    <div className="border border-black h-full">2</div>
-                    <div className="border border-black h-full">3</div>
-                    <div className="border border-black h-full">4</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  mt-[50px] h-full gap-10 md:gap-6 lg:gap-5">
+                    <div className="h-full">
+                        <TbTruckDelivery size={30} />
+                        <h5 className="font-clash-regular text-[22px] mt-2">
+                            Next day as standard
+                        </h5>
+                        <p className="font-satoshi-regular text-[15px] mt-2">
+                            Order before 3pm and get your order <br /> as
+                            standard.
+                        </p>
+                    </div>
+                    <div className="h-full">
+                        <CiCircleCheck size={30} />
+                        <h5 className="font-clash-regular text-[22px] mt-2">
+                            Made by true artisans
+                        </h5>
+                        <p className="font-satoshi-regular text-[15px] mt-2">
+                            Handmade crafted goods made with real passion and
+                            craftmanship
+                        </p>
+                    </div>
+                    <div className="h-full">
+                        <CiCircleCheck size={30} />
+                        <h5 className="font-clash-regular text-[22px] mt-2">
+                            Unbeatable prices
+                        </h5>
+                        <p className="font-satoshi-regular text-[15px] mt-2">
+                            For our materials and quality you won’t find better
+                            prices anywhere
+                        </p>
+                    </div>
+                    <div className="h-full">
+                        <CiCircleCheck size={30} />
+                        <h5 className="font-clash-regular text-[22px] mt-2">
+                            Recycled packaging
+                        </h5>
+                        <p className="font-satoshi-regular text-[15px] mt-2">
+                            We use 100% recycled packaging to ensure our
+                            footprint is manageable
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

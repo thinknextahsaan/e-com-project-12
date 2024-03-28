@@ -5,4 +5,4 @@ function cn(...args) {
     return twMerge(clsx(args));
 }
 
-export default cn;
+export default cn
