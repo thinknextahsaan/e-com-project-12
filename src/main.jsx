@@ -4,13 +4,16 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import UserContextProvider from "./context/UserContext.jsx";
+import SupbaseAuthProvider from "./context/SupabaseAuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <UserContextProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </UserContextProvider>
+        <SupbaseAuthProvider>
+            <UserContextProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </UserContextProvider>
+        </SupbaseAuthProvider>
     </React.StrictMode>
 );

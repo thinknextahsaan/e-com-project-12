@@ -4,6 +4,7 @@ import { registerValidation } from "../lib/validations";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { UserContext } from "../context/UserContext";
+import { useSupabaseAuth } from "../context/SupabaseAuthContext";
 
 const INITIAL_STATE = {
     username: "",
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
 };
 
 const Register = () => {
+    const { signUpUserWithEmailAndPassword } = useSupabaseAuth();
     const { user, registerUser } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -23,10 +25,10 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let result = await registerUser(registerData);
+        let result = await signUpUserWithEmailAndPassword(registerData);
+        console.log(result);
         if (result) {
             setRegisterData(INITIAL_STATE);
-            navigate("/login");
         }
     };
 
