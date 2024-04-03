@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { registerValidation } from "../lib/validations";
-import toast from "react-hot-toast";
-import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { useSupabaseAuth } from "../context/SupabaseAuthContext";
+import { LuLoader } from "react-icons/lu";
 
 const INITIAL_STATE = {
     username: "",
@@ -13,8 +11,8 @@ const INITIAL_STATE = {
 };
 
 const Register = () => {
-    const { signUpUserWithEmailAndPassword } = useSupabaseAuth();
-    const { user, registerUser } = useContext(UserContext);
+    const { signUpUserWithEmailAndPassword, user } = useSupabaseAuth();
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [registerData, setRegisterData] = useState(INITIAL_STATE);
@@ -25,10 +23,12 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         let result = await signUpUserWithEmailAndPassword(registerData);
-        console.log(result);
         if (result) {
+            setLoading(false);
             setRegisterData(INITIAL_STATE);
+            navigate("/");
         }
     };
 
@@ -106,10 +106,18 @@ const Register = () => {
 
                         <div>
                             <button
+                                disabled={loading}
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Sign up
+                                {loading ? (
+                                    <LuLoader
+                                        size={25}
+                                        className="animate-spin"
+                                    />
+                                ) : (
+                                    "Sign Up"
+                                )}
                             </button>
                         </div>
                     </form>

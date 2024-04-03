@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../supabase/supabase.config";
-import { registerValidation } from "../lib/validations";
+import { loginValidations, registerValidation } from "../lib/validations";
 import toast from "react-hot-toast";
 
 const SupabaseContext = createContext();
@@ -47,6 +47,55 @@ const SupbaseAuthProvider = ({ children }) => {
         }
     };
 
+    const signInUserWithEmailAndPassword = async ({ email, password }) => {
+        try {
+            let result = await loginValidations.validate(
+                { email, password },
+                {
+                    abortEarly: false,
+                }
+            );
+
+            let { data, error } = await supabase.auth.signInWithPassword({
+                email: result.email,
+                password: result.password,
+            });
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            toast.success("User Logged in successfully");
+
+            return data;
+        } catch (error) {
+            toast.error(
+                error.message || error?.errors[0] || "Something went wrong"
+            );
+
+            return false;
+        }
+    };
+
+    const logoutUser = async () => {
+        try {
+            let { error } = await supabase.auth.signOut();
+
+            if (error) {
+                throw new Error(error.message);
+            }
+
+            toast.success("Logged out successfully");
+            return true;
+        } catch (error) {
+            toast.error(
+                error.message || error?.errors[0] || "Something went wrong"
+            );
+
+            return false;
+        }
+    };
+
     useEffect(() => {
         let { data } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === "SIGNED_IN") {
@@ -63,10 +112,15 @@ const SupbaseAuthProvider = ({ children }) => {
         };
     }, []);
 
-    console.log(user);
-
     return (
-        <SupabaseContext.Provider value={{ signUpUserWithEmailAndPassword }}>
+        <SupabaseContext.Provider
+            value={{
+                signUpUserWithEmailAndPassword,
+                signInUserWithEmailAndPassword,
+                user,
+                logoutUser,
+            }}
+        >
             {children}
         </SupabaseContext.Provider>
     );

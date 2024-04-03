@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { FaXmark } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import Button from "./Button";
+import { useSupabaseAuth } from "../context/SupabaseAuthContext";
 
 const links = [
     {
@@ -23,7 +24,7 @@ const links = [
 ];
 
 const Navbar = () => {
-    const { user, logoutUser } = useContext(UserContext);
+    const { user, logoutUser } = useSupabaseAuth();
     const [open, setOpen] = useState(false);
 
     return (

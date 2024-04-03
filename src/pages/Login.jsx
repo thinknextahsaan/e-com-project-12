@@ -1,19 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { loginValidations } from "../lib/validations";
-import toast from "react-hot-toast";
-import axios from "axios";
-import { UserContext } from "../context/UserContext";
+import { LuLoader } from "react-icons/lu";
+import { useSupabaseAuth } from "../context/SupabaseAuthContext";
 
 const INITIAL_STATE = {
-    username: "",
+    email: "",
     password: "",
 };
 
 const Login = () => {
+    const { signInUserWithEmailAndPassword, user } = useSupabaseAuth();
     const navigate = useNavigate();
-    const { user, loginUser } = useContext(UserContext);
     const [loginData, setLoginData] = useState(INITIAL_STATE);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -21,8 +20,10 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let result = await loginUser(loginData);
+        setLoading(true);
+        let result = await signInUserWithEmailAndPassword(loginData);
         if (result) {
+            setLoading(false);
             setLoginData(INITIAL_STATE);
             navigate("/", { replace: true });
         }
@@ -49,14 +50,14 @@ const Login = () => {
                                     htmlFor="password"
                                     className="block text-sm font-medium leading-6 text-gray-900"
                                 >
-                                    Username
+                                    Email
                                 </label>
                             </div>
                             <div className="mt-2">
                                 <input
-                                    value={loginData.username}
+                                    value={loginData.email}
                                     onChange={handleChange}
-                                    name="username"
+                                    name="email"
                                     type="text"
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
@@ -84,10 +85,11 @@ const Login = () => {
 
                         <div>
                             <button
+                                disabled={loading}
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Sign in
+                                {loading ? <LuLoader size={25} className="animate-spin"/> : "Sign In"}
                             </button>
                         </div>
                     </form>
