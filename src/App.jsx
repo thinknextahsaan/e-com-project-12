@@ -9,21 +9,20 @@ import Navbar from "./components/Navbar";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Footer from "./components/Footer";
+import Cart from "./pages/Cart";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_API_URL || "";
 
 const App = () => {
-    const {pathname} = useLocation()
+    const { pathname } = useLocation();
 
     useEffect(() => {
         window.scrollTo({
-            top : 0,
-            left : 0,
-            behavior : "smooth"
+            top: 0,
+            left: 0,
+            behavior: "smooth",
         });
     }, [pathname]);
-
-
 
     return (
         <div>
@@ -32,9 +31,12 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/shop" element={<Shop />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+
                 <Route path="/*" element={<div>Not Found</div>} />
             </Routes>
             <Footer />

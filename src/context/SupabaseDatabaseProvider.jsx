@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import supabase from "../supabase/supabase.config";
+import axios from "axios";
 
 export const SupabaseDatabaseContext = createContext();
 

@@ -25,8 +25,8 @@ const Register = () => {
         e.preventDefault();
         setLoading(true);
         let result = await signUpUserWithEmailAndPassword(registerData);
+        setLoading(false);
         if (result) {
-            setLoading(false);
             setRegisterData(INITIAL_STATE);
             navigate("/");
         }

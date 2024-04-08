@@ -1,6 +1,8 @@
 import React from "react";
 import { useSupbaseProducts } from "../context/SupabaseDatabaseProvider";
 import ProductCard from "../components/ProductCard";
+import { useSupabaseAuth } from "../context/SupabaseAuthContext";
+import { Navigate } from "react-router-dom";
 
 const Shop = () => {
     const { products } = useSupbaseProducts();

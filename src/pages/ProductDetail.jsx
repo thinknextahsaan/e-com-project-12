@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useSupbaseProducts } from "../context/SupabaseDatabaseProvider";
 import { FiLoader } from "react-icons/fi";
 import Button from "../components/Button";
+import ProductCounter from "../components/ProductCounter";
+import { FaCartShopping } from "react-icons/fa6";
 
 const ProductDetail = () => {
     const { getProductById } = useSupbaseProducts();
@@ -64,20 +66,11 @@ const ProductDetail = () => {
                         <p className="font-clash-regular text-base ">
                             Quantity
                         </p>
-                        <div className=" w-fit bg-gray-100 mt-4">
-                            <button className="px-2 py-3 ">-</button>
-                            <input
-                                className="border-none bg-white text-center outline-none px-2 py-3  w-[70px] inline-flex items-center justify-center"
-                                type="number"
-                                disabled
-                                value={1}
-                            />
-                            <button className="px-2 py-3 ">+</button>
-                        </div>
+                        <ProductCounter />
                     </div>
                     <div className="mt-10 flex gap-5">
-                        <Button className="bg-custom-blue text-white font-satoshi-regular">
-                            Add To Card
+                        <Button className="bg-custom-blue text-white font-satoshi-regular flex gap-2 items-center">
+                            <FaCartShopping /> Add To Cart
                         </Button>
                         <Button className="bg-custom-white text-custom-blue font-satoshi-regular">
                             Save to Favorites

@@ -34,7 +34,22 @@ const SupbaseAuthProvider = ({ children }) => {
             if (error) {
                 throw new Error(error.message);
             }
+            // another api call to save user in database
+            const registeredEmail = data.session.user.user_metadata.email;
+            const registeredUsername = data.session.user.user_metadata.username;
+            const registeredId = data.session.user.id;
 
+            let { data: userCreateData, error: userCreatedError } =
+                await supabase
+                    .from("users")
+                    .insert({
+                        username: registeredUsername,
+                        email: registeredEmail,
+                        id: registeredId,
+                    })
+                    .select();
+
+            console.log(userCreateData, userCreatedError);
             toast.success("User registered successfully");
 
             return data;
