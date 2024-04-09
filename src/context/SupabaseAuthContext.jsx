@@ -34,22 +34,16 @@ const SupbaseAuthProvider = ({ children }) => {
             if (error) {
                 throw new Error(error.message);
             }
-            // another api call to save user in database
-            const registeredEmail = data.session.user.user_metadata.email;
-            const registeredUsername = data.session.user.user_metadata.username;
-            const registeredId = data.session.user.id;
 
-            let { data: userCreateData, error: userCreatedError } =
-                await supabase
-                    .from("users")
-                    .insert({
-                        username: registeredUsername,
-                        email: registeredEmail,
-                        id: registeredId,
-                    })
+            if (data.user) {
+                let { data: cartData, error: cartError } = await supabase
+                    .from("cart")
+                    .insert({ user_id: data.user.id })
                     .select();
 
-            console.log(userCreateData, userCreatedError);
+                console.log("Cart Created Successfully", cartData);
+            }
+
             toast.success("User registered successfully");
 
             return data;
