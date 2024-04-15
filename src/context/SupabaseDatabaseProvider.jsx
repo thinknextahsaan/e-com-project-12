@@ -9,7 +9,7 @@ export const SupabaseDatabaseContext = createContext();
 export default function SupabaseDatabaseProvider({ children }) {
     const { user } = useSupabaseAuth();
     const [products, setProducts] = useState(null);
-    const [cartProducts, setCartProducts] = useState(null);
+    const [cart, setCart] = useState(null);
 
     useEffect(() => {
         async function getProducts() {
@@ -19,7 +19,7 @@ export default function SupabaseDatabaseProvider({ children }) {
                 if (error) {
                     throw new Error(error.message);
                 }
-                console.log(data);
+
                 setProducts(data);
             } catch (error) {
                 toast.error(error.message || "Something went wrong");
@@ -32,7 +32,7 @@ export default function SupabaseDatabaseProvider({ children }) {
     useEffect(() => {
         if (user) {
             const fetchCartItems = async (userid) => {
-                let { data: cart, error: cartError } = await supabase
+                let { data: fetchedCart, error: cartError } = await supabase
                     .from("cart")
                     .select()
                     .eq("user_id", userid);
@@ -44,9 +44,12 @@ export default function SupabaseDatabaseProvider({ children }) {
                     await supabase
                         .from("cart_items")
                         .select()
-                        .eq("cart_id", cart[0].id);
+                        .eq("cart_id", fetchedCart[0].id);
 
-                setCartProducts(cartItemsData);
+                setCart({
+                    ...fetchedCart[0],
+                    items: [...cartItemsData],
+                });
             };
 
             fetchCartItems(user.user.id);
@@ -76,7 +79,7 @@ export default function SupabaseDatabaseProvider({ children }) {
 
     return (
         <SupabaseDatabaseContext.Provider
-            value={{ products, getProductById, cartProducts }}
+            value={{ products, getProductById, cart }}
         >
             {children}
         </SupabaseDatabaseContext.Provider>

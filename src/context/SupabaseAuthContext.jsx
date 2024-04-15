@@ -35,15 +35,6 @@ const SupbaseAuthProvider = ({ children }) => {
                 throw new Error(error.message);
             }
 
-            if (data.user) {
-                let { data: cartData, error: cartError } = await supabase
-                    .from("cart")
-                    .insert({ user_id: data.user.id })
-                    .select();
-
-                console.log("Cart Created Successfully", cartData);
-            }
-
             toast.success("User registered successfully");
 
             return data;

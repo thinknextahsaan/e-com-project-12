@@ -99,8 +99,6 @@ export default function UserContextProvider({ children }) {
         }
     };
 
-    console.log(user);
-
     return (
         <UserContext.Provider
             value={{ user, registerUser, loginUser, logoutUser }}

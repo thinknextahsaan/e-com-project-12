@@ -7,6 +7,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import Button from "./Button";
 import { useSupabaseAuth } from "../context/SupabaseAuthContext";
+import { useSupbaseProducts } from "../context/SupabaseDatabaseProvider";
 
 const links = [
     {
@@ -25,6 +26,7 @@ const links = [
 
 const Navbar = () => {
     const { user, logoutUser } = useSupabaseAuth();
+    const { cart: cartProducts } = useSupbaseProducts();
     const [open, setOpen] = useState(false);
 
     return (
@@ -96,7 +98,12 @@ const Navbar = () => {
                 {/* Desktop Buttons for user auth */}
                 <div className="gap-3 hidden md:flex">
                     <Link to={"/cart"}>
-                        <button className=" px-2 py-1 font-semibold text-slate-700 flex gap-2 items-center">
+                        <button className="relative px-2 py-1 font-semibold text-slate-700 flex gap-2 items-center">
+                            {cartProducts?.items?.length > 0 && (
+                                <span className="inline-flex size-[18px] bg-slate-700 rounded-full items-center justify-center text-white text-[8px] p-[2px] absolute -top-1 -left-1">
+                                    {cartProducts?.items?.length}
+                                </span>
+                            )}
                             <FaShoppingCart /> Cart
                         </button>
                     </Link>
